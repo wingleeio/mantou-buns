@@ -16,10 +16,9 @@ const StyledModal = styled(Modal)`
 
 const Picture = styled.div`
 	position: relative;
-	width: 120px;
+	width: 160px;
 	background-size: cover;
 	background-image: url(${LoginPicture});
-	margin-right: 24px;
 `;
 
 const Container = styled.div`

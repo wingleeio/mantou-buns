@@ -3,6 +3,8 @@ import { Icon, Button, Avatar, Badge } from "antd";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
+import AvatarDropdown from "./AvatarDropdown";
+import { logout } from "../../store/actions/auth.actions";
 
 const UserNavContainer = styled.div`
 	display: flex;
@@ -19,7 +21,7 @@ const IconContainer = styled.div`
 	width: 64px;
 `;
 
-function UserNavigation({ authenticated, history }) {
+function UserNavigation({ authenticated, history, user, logout }) {
 	const login = () => {
 		history.push({
 			pathname: "/login",
@@ -42,7 +44,7 @@ function UserNavigation({ authenticated, history }) {
 							<Icon type='bell' style={{ fontSize: "18px" }} />
 						</Badge>
 					</IconContainer>
-					<Avatar icon='user' />
+					<AvatarDropdown user={user} logout={logout} />
 				</React.Fragment>
 			) : (
 				<Button.Group>
@@ -59,8 +61,11 @@ function UserNavigation({ authenticated, history }) {
 }
 
 export default withRouter(
-	connect(state => ({
-		authenticated: state.auth.authenticated,
-		user: state.auth.user
-	}))(UserNavigation)
+	connect(
+		state => ({
+			authenticated: state.auth.authenticated,
+			user: state.auth.user
+		}),
+		{ logout }
+	)(UserNavigation)
 );

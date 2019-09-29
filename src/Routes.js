@@ -36,7 +36,7 @@ class ModalSwitch extends React.Component {
 		return (
 			<React.Fragment>
 				<Switch location={modal ? this.previousLocation : location}>
-					<Route exact path='/' exact component={Home} />
+					<Route exact path='/' component={Home} />
 					<Route path='/login' component={Login} />
 				</Switch>
 				{modal && <Route path='/login' component={LoginModal} />}

@@ -1,18 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
+import { login } from "../../store/actions/auth.actions";
 import styled from "styled-components";
 
 const FormContainer = styled.div`
 	display: flex;
 	align-items: center;
-
+	justify-content: center;
+	flex-grow: 2;
 	min-height: 380px;
 `;
 
 const StyledForm = styled(Form)`
 	max-width: 300px;
+	padding: 48px 0px 24px 0px !important;
 `;
 
 const ForgotLink = styled(Link)`
@@ -24,20 +27,33 @@ const LoginButton = styled(Button)`
 `;
 
 function LoginForm(props) {
-	const { form } = props;
-	const { getFieldDecorator } = form;
+	const { form, login, auth, history } = props;
+	const { auth_loading, authenticated } = auth;
+	const { getFieldDecorator, validateFields } = form;
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		validateFields((err, values) => !err && login(values));
+	};
+
+	React.useEffect(() => {
+		if (authenticated) {
+			history.push("/");
+		}
+	}, [history, authenticated]);
+
 	return (
 		<FormContainer>
-			<StyledForm>
+			<StyledForm onSubmit={handleSubmit}>
 				<Form.Item>
-					{getFieldDecorator("username", {
+					{getFieldDecorator("email", {
 						/*  prettier-ignore */
-						rules: [{ required: true, message: "Please input your username!" }]
+						rules: [{ required: true, message: "Please input your email!" }]
 					})(
 						<Input
 							/*  prettier-ignore */
 							prefix={<Icon type='user' style={{ color: "rgba(0,0,0,.25)" }} />}
-							placeholder='Username'
+							placeholder='Email'
 						/>
 					)}
 				</Form.Item>
@@ -63,7 +79,8 @@ function LoginForm(props) {
 					<LoginButton
 						type='primary'
 						htmlType='submit'
-						className='login-form-button'>
+						className='login-form-button'
+						loading={auth_loading}>
 						Log in
 					</LoginButton>
 					Or <Link to=''>register now!</Link>
@@ -73,9 +90,13 @@ function LoginForm(props) {
 	);
 }
 
-export default Form.create({ name: "login" })(
-	connect(
-		() => ({}),
-		{}
-	)(LoginForm)
+export default withRouter(
+	Form.create({ name: "login" })(
+		connect(
+			state => ({
+				auth: state.auth
+			}),
+			{ login }
+		)(LoginForm)
+	)
 );
