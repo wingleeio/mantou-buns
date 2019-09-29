@@ -6,13 +6,16 @@ import styled from "styled-components";
 import LoginPicture from "./login-bg.jpeg";
 
 const StyledModal = styled(Modal)`
-	overflow: hidden;
 	.ant-modal-body {
 		padding: 0px !important;
+	}
+	.ant-modal-content {
+		overflow: hidden;
 	}
 `;
 
 const Picture = styled.div`
+	position: relative;
 	width: 120px;
 	background-size: cover;
 	background-image: url(${LoginPicture});
