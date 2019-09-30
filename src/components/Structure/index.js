@@ -14,6 +14,7 @@ const Header = styled(Layout.Header)`
 `;
 
 const Content = styled(Layout.Content)`
+	margin-top: 64px;
 	padding: 12px 12px;
 	min-height: calc(100vh - 64px) !important;
 	display: ${props => {
@@ -51,7 +52,7 @@ const Logo = styled.h1`
 function Structure(props) {
 	return (
 		<Layout>
-			<Header>
+			<Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
 				<Logo>MANTOU</Logo>
 				<Search />
 				<Navigation />

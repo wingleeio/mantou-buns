@@ -3,7 +3,9 @@ import axios from "axios";
 const initialState = {
 	token: localStorage.token,
 	authenticated: false,
+	user_loading: false,
 	auth_loading: false,
+	app_loading: true,
 	user: {}
 };
 
@@ -18,7 +20,8 @@ export default function(state = initialState, { type, payload }) {
 				token,
 				user: user ? user : payload,
 				authenticated: true,
-				auth_loading: false
+				auth_loading: false,
+				app_loading: false
 			};
 		case "AUTH_LOGOUT":
 			axios.defaults.headers.common["Authorization"] = null;
@@ -37,7 +40,24 @@ export default function(state = initialState, { type, payload }) {
 			return {
 				...state,
 				authenticated: false,
-				auth_loading: false
+				auth_loading: false,
+				app_loading: false
+			};
+		case "USER_UPDATE_SUCCESS":
+			return {
+				...state,
+				user_loading: false,
+				user: payload
+			};
+		case "USER_UPDATE_LOADING":
+			return {
+				...state,
+				user_loading: true
+			};
+		case "USER_UPDATE_FAILED":
+			return {
+				...state,
+				user_loading: false
 			};
 		default:
 			return state;

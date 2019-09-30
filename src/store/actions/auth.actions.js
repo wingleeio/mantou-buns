@@ -72,3 +72,22 @@ export const register = postData => dispatch => {
 			})
 	});
 };
+
+export const updateUser = postData => dispatch => {
+	dispatch({ type: "USER_UPDATE_LOADING" });
+
+	requestWithHandling({
+		url: USER_ROUTE,
+		method: "post",
+		postData,
+		callback: data =>
+			dispatch({
+				type: "USER_UPDATE_SUCCESS",
+				payload: data
+			}),
+		onError: () =>
+			dispatch({
+				type: "USER_UPDATE_FAILED"
+			})
+	});
+};
