@@ -1,4 +1,6 @@
+import React from "react";
 import { requestWithHandling } from "../../api";
+import { notification, Icon } from "antd";
 import {
 	LOGIN_ROUTE,
 	USER_ROUTE,
@@ -80,11 +82,18 @@ export const updateUser = postData => dispatch => {
 		url: USER_ROUTE,
 		method: "post",
 		postData,
-		callback: data =>
+		callback: data => {
 			dispatch({
 				type: "USER_UPDATE_SUCCESS",
 				payload: data
-			}),
+			});
+
+			notification.success({
+				message: "Updated Profile",
+				description: `You're looking good ${data.name}!`,
+				icon: <Icon type='smile' style={{ color: "#108ee9" }} />
+			});
+		},
 		onError: () =>
 			dispatch({
 				type: "USER_UPDATE_FAILED"
