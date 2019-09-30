@@ -9,13 +9,23 @@ import Navigation from "./Navigation";
 const Header = styled(Layout.Header)`
 	display: flex;
 	align-items: center;
-
+	border-bottom: 1px solid #e8e8e8;
+	height: 65px;
 	background: white !important;
+`;
+
+const Wrapper = styled.div`
+	display: flex;
+	align-items: center;
+	width: 100%;
+	max-width: 1178px;
+	height: 100%;
+	margin: 0 auto;
 `;
 
 const Content = styled(Layout.Content)`
 	margin-top: 64px;
-	padding: 12px 12px;
+	padding: 50px 50px;
 	min-height: calc(100vh - 64px) !important;
 	display: ${props => {
 		switch (props.type) {
@@ -58,12 +68,16 @@ function Structure(props) {
 		<Layout>
 			<Helmet title='Mantou Buns' />
 			<Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-				<Logo>MANTOU</Logo>
-				<Search />
-				<Navigation />
-				<UserNavigation />
+				<Wrapper>
+					<Logo>MANTOU</Logo>
+					<Search />
+					<Navigation />
+					<UserNavigation />
+				</Wrapper>
 			</Header>
-			<Content type={props.type}>{props.children}</Content>
+			<Content type={props.type}>
+				<Wrapper>{props.children}</Wrapper>
+			</Content>
 		</Layout>
 	);
 }

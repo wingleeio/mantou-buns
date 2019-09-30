@@ -18,7 +18,7 @@ function CheckAuthentication(props) {
 	}, [checkAuthentication]);
 	return app_loading ? (
 		<Content>
-			<Spin />
+			<Spin size='large' />
 		</Content>
 	) : (
 		props.children

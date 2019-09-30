@@ -1,8 +1,13 @@
 import React from "react";
 import Structure from "../../components/Structure";
+import PostList from "../../components/PostList";
 
 function Home() {
-	return <Structure></Structure>;
+	return (
+		<Structure>
+			<PostList />
+		</Structure>
+	);
 }
 
 export default Home;

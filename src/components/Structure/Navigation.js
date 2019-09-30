@@ -14,7 +14,7 @@ function Navigation() {
 		<StyledMenu
 			mode='horizontal'
 			defaultSelectedKeys={["1"]}
-			style={{ lineHeight: "64px" }}>
+			style={{ lineHeight: "63px" }}>
 			<Menu.Item key='1'>Latest</Menu.Item>
 			<Menu.Item key='2'>Trending</Menu.Item>
 		</StyledMenu>
