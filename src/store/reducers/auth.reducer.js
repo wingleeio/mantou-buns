@@ -16,7 +16,7 @@ export default function(state = initialState, { type, payload }) {
 			return {
 				...state,
 				token,
-				user,
+				user: user ? user : payload,
 				authenticated: true,
 				auth_loading: false
 			};

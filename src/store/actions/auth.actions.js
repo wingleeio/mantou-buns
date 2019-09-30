@@ -1,5 +1,10 @@
 import { requestWithHandling } from "../../api";
-import { LOGIN_ROUTE, USER_ROUTE, LOGOUT_ROUTE } from "../../api/endpoints";
+import {
+	LOGIN_ROUTE,
+	USER_ROUTE,
+	LOGOUT_ROUTE,
+	REGISTER_ROUTE
+} from "../../api/endpoints";
 
 export const logout = () => dispatch => {
 	requestWithHandling({
@@ -35,6 +40,25 @@ export const login = postData => dispatch => {
 
 	requestWithHandling({
 		url: LOGIN_ROUTE,
+		method: "post",
+		postData,
+		callback: data =>
+			dispatch({
+				type: "AUTH_SUCCESS",
+				payload: data
+			}),
+		onError: () =>
+			dispatch({
+				type: "AUTH_FAILED"
+			})
+	});
+};
+
+export const register = postData => dispatch => {
+	dispatch({ type: "AUTH_LOADING" });
+
+	requestWithHandling({
+		url: REGISTER_ROUTE,
 		method: "post",
 		postData,
 		callback: data =>

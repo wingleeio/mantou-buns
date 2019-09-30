@@ -1,8 +1,9 @@
 import React from "react";
 import { Avatar, Dropdown, Menu, Icon } from "antd";
 
-function AvatarDropdown(props) {
-	const { logout } = props;
+function AvatarDropdown(props = {}) {
+	const { logout, user = {} } = props;
+	const { avatar = {} } = user;
 	return (
 		<Dropdown
 			placement='bottomCenter'
@@ -16,7 +17,7 @@ function AvatarDropdown(props) {
 					</Menu.Item>
 				</Menu>
 			}>
-			<Avatar icon='user' />
+			<Avatar icon='user' src={avatar ? avatar.url : ""} />
 		</Dropdown>
 	);
 }

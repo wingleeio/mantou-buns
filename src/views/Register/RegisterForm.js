@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
-import { login } from "../../store/actions/auth.actions";
+import { register } from "../../store/actions/auth.actions";
 import styled from "styled-components";
 
 const FormContainer = styled.div`
@@ -14,26 +14,22 @@ const FormContainer = styled.div`
 `;
 
 const StyledForm = styled(Form)`
-	max-width: 300px;
+	width: 300px;
 	padding: 48px 0px 24px 0px !important;
-`;
-
-const ForgotLink = styled(Link)`
-	float: right;
 `;
 
 const LoginButton = styled(Button)`
 	width: 100%;
 `;
 
-function LoginForm(props) {
-	const { form, login, auth, history } = props;
+function RegisterForm(props) {
+	const { form, register, auth, history } = props;
 	const { auth_loading, authenticated } = auth;
 	const { getFieldDecorator, validateFields } = form;
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		validateFields((err, values) => !err && login(values));
+		validateFields((err, values) => !err && register(values));
 	};
 
 	React.useEffect(() => {
@@ -45,8 +41,31 @@ function LoginForm(props) {
 	return (
 		<FormContainer>
 			<StyledForm onSubmit={handleSubmit}>
-				<h2>Login</h2>
-				<p>Welcome back to Mantou Buns</p>
+				<h2>Join Mantou Buns</h2>
+				<p>
+					Already a member?{" "}
+					<Link
+						to={{
+							pathname: "/login",
+							state: {
+								modal: true
+							}
+						}}>
+						Login now
+					</Link>
+				</p>
+				<Form.Item>
+					{getFieldDecorator("name", {
+						/*  prettier-ignore */
+						rules: [{ required: true, message: "Please input your name!" }]
+					})(
+						<Input
+							/*  prettier-ignore */
+							prefix={<Icon type='user' style={{ color: "rgba(0,0,0,.25)" }} />}
+							placeholder='Name'
+						/>
+					)}
+				</Form.Item>
 				<Form.Item>
 					{getFieldDecorator("email", {
 						/*  prettier-ignore */
@@ -73,40 +92,44 @@ function LoginForm(props) {
 					)}
 				</Form.Item>
 				<Form.Item>
-					{getFieldDecorator("remember", {
-						valuePropName: "checked",
-						initialValue: true
-					})(<Checkbox>Remember me</Checkbox>)}
-					<ForgotLink to='/'>Forgot Password</ForgotLink>
+					{getFieldDecorator("password_confirmation", {
+						/*  prettier-ignore */
+						rules: [{ required: true, message: "Please confirm your Password!" }]
+					})(
+						<Input
+							/*  prettier-ignore */
+							prefix={<Icon type='lock' style={{ color: "rgba(0,0,0,.25)" }} /> }
+							type='password'
+							placeholder='Confirm Password'
+						/>
+					)}
+				</Form.Item>
+
+				<Form.Item>
 					<LoginButton
 						type='primary'
 						htmlType='submit'
 						loading={auth_loading}>
-						Log in
+						Register
 					</LoginButton>
-					Or{" "}
-					<Link
-						to={{
-							pathname: "/register",
-							state: {
-								modal: true
-							}
-						}}>
-						register now!
-					</Link>
 				</Form.Item>
+				<small>
+					By clicking Register, I confirm that I have read and agree
+					to the Mantou Buns <Link to=''>Terms of Service</Link> and{" "}
+					<Link to=''>Privacy Policy</Link>.
+				</small>
 			</StyledForm>
 		</FormContainer>
 	);
 }
 
 export default withRouter(
-	Form.create({ name: "login" })(
+	Form.create({ name: "register" })(
 		connect(
 			state => ({
 				auth: state.auth
 			}),
-			{ login }
-		)(LoginForm)
+			{ register }
+		)(RegisterForm)
 	)
 );

@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./views/Home";
 import LoginModal from "./views/Login/LoginModal";
 import Login from "./views/Login";
+import RegisterModal from "./views/Register/RegisterModal";
+import Register from "./views/Register";
 
 function Routes() {
 	return (
@@ -38,8 +40,14 @@ class ModalSwitch extends React.Component {
 				<Switch location={modal ? this.previousLocation : location}>
 					<Route exact path='/' component={Home} />
 					<Route path='/login' component={Login} />
+					<Route path='/register' component={Register} />
 				</Switch>
-				{modal && <Route path='/login' component={LoginModal} />}
+				{modal && (
+					<React.Fragment>
+						<Route path='/login' component={LoginModal} />
+						<Route path='/register' component={RegisterModal} />
+					</React.Fragment>
+				)}
 			</React.Fragment>
 		);
 	}
