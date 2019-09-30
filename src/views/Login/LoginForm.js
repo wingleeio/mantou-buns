@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
@@ -44,6 +45,7 @@ function LoginForm(props) {
 
 	return (
 		<FormContainer>
+			<Helmet title='Login - Mantou Buns' />
 			<StyledForm onSubmit={handleSubmit}>
 				<h2>Login</h2>
 				<p>Welcome back to Mantou Buns</p>

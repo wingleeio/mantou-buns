@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Helmet } from "react-helmet";
 import { Layout } from "antd";
 import styled from "styled-components";
 import Search from "./Search";
@@ -47,11 +47,16 @@ const Content = styled(Layout.Content)`
 const Logo = styled.h1`
 	padding: 0px;
 	margin: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: rgba(0, 0, 0, 0.65);
 `;
 
 function Structure(props) {
 	return (
 		<Layout>
+			<Helmet title='Mantou Buns' />
 			<Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
 				<Logo>MANTOU</Logo>
 				<Search />

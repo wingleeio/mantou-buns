@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Form, Icon, Input, Button, Upload } from "antd";
@@ -109,6 +110,7 @@ function SettingsForm(props) {
 
 	return (
 		<FormContainer>
+			<Helmet title='Settings - Mantou Buns' />
 			<StyledForm onSubmit={handleSubmit}>
 				<h2>Settings {user_loading && <Icon type='loading' />}</h2>
 				<p>Customize your profile.</p>
