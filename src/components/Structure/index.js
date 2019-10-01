@@ -27,7 +27,7 @@ const Wrapper = styled.div`
 const Content = styled(Layout.Content)`
 	margin-top: 64px;
 	padding: 25px 0px;
-	min-height: calc(100vh - 64px) !important;
+	min-height: ${window.innerHeight}px !important;
 	display: ${props => {
 		switch (props.type) {
 			case "centered":
@@ -79,7 +79,9 @@ function Structure(props) {
 				</Wrapper>
 			</Header>
 			<Wrapper>
-				<Content type={props.type}>{props.children}</Content>
+				<Content type={props.type} height={() => window.innerHeight}>
+					{props.children}
+				</Content>
 			</Wrapper>
 		</Layout>
 	);
