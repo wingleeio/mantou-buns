@@ -13,3 +13,17 @@ export const getPosts = query => dispatch => {
 			})
 	});
 };
+
+export const getPost = ID => dispatch => {
+	dispatch({ type: "POST_LOADING" });
+	requestWithHandling({
+		url: `${POSTS_ROUTE}/${ID}`,
+		method: "get",
+		callback: data => {
+			dispatch({
+				type: "POST_GET_SUCCESS",
+				payload: data
+			});
+		}
+	});
+};

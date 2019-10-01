@@ -7,6 +7,8 @@ import RegisterModal from "./views/Register/RegisterModal";
 import Register from "./views/Register";
 import SettingsModal from "./views/Settings/SettingsModal";
 import Settings from "./views/Settings";
+import PostModal from "./views/Post/PostModal";
+import Post from "./views/Post";
 
 function Routes() {
 	return (
@@ -44,12 +46,14 @@ class ModalSwitch extends React.Component {
 					<Route path='/login' component={Login} />
 					<Route path='/register' component={Register} />
 					<Route path='/settings' component={Settings} />
+					<Route path='/post/:id' component={Post} />
 				</Switch>
 				{modal && (
 					<React.Fragment>
 						<Route path='/login' component={LoginModal} />
 						<Route path='/register' component={RegisterModal} />
 						<Route path='/settings' component={SettingsModal} />
+						<Route path='/post/:id' component={PostModal} />
 					</React.Fragment>
 				)}
 			</React.Fragment>

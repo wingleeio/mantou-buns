@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, Button, Avatar, Badge } from "antd";
+import { Icon, Button, Badge } from "antd";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
