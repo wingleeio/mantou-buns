@@ -27,7 +27,7 @@ function AvatarDropdown(props = {}) {
 					</Menu.Item>
 				</Menu>
 			}>
-			<Avatar icon='user' src={avatar ? avatar.url : ""} />
+			<Avatar icon='user' size='large' src={avatar ? avatar.url : ""} />
 		</Dropdown>
 	);
 }

@@ -27,10 +27,26 @@ const ImageContainer = styled.div`
 	}
 `;
 
+const PostAvatar = styled(Avatar)`
+	img {
+		width: 100% !important;
+		height: 100% !important;
+	}
+`;
+
+const Item = styled(List.Item)`
+	width: 100%;
+	&:hover {
+		cursor: pointer;
+		background-color: rgba(0, 0, 0, 0.02);
+	}
+`;
+
 function PostList(props) {
 	const { auth, posts } = props;
 	const { posts_loading, posts: data = [] } = posts;
 	const { authenticated } = auth;
+
 	React.useEffect(() => {
 		props.getPosts();
 	}, []);
@@ -46,14 +62,15 @@ function PostList(props) {
 			dataSource={data}
 			style={{ backgroundColor: "white", width: "100%" }}
 			renderItem={item => (
-				<List.Item style={{ width: "100%" }}>
+				<Item style={{ width: "100%" }}>
 					<Comment
 						author={item.author.name}
 						style={{ width: "100%" }}
 						avatar={
-							<Avatar
+							<PostAvatar
 								icon='user'
 								shape='sqaure'
+								size='large'
 								src={
 									item.author.avatar && item.author.avatar.url
 								}
@@ -90,7 +107,7 @@ function PostList(props) {
 							]
 						}
 					/>
-				</List.Item>
+				</Item>
 			)}
 		/>
 	);

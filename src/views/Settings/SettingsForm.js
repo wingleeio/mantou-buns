@@ -134,7 +134,7 @@ function SettingsForm(props) {
 						customRequest={dummyRequest}
 						onChange={avatarChange}>
 						<div>
-							{state.avatarURL || avatar ? (
+							{state.avatarURL || (avatar && avatar.url) ? (
 								<img
 									className='upload-image'
 									src={

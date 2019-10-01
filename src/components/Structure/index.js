@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 import { Layout } from "antd";
 import styled from "styled-components";
 import Search from "./Search";
@@ -25,7 +26,7 @@ const Wrapper = styled.div`
 
 const Content = styled(Layout.Content)`
 	margin-top: 64px;
-	padding: 50px 50px;
+	padding: 25px 0px;
 	min-height: calc(100vh - 64px) !important;
 	display: ${props => {
 		switch (props.type) {
@@ -69,15 +70,17 @@ function Structure(props) {
 			<Helmet title='Mantou Buns' />
 			<Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
 				<Wrapper>
-					<Logo>MANTOU</Logo>
+					<Logo>
+						<Link to='/'>MANTOU</Link>
+					</Logo>
 					<Search />
 					<Navigation />
 					<UserNavigation />
 				</Wrapper>
 			</Header>
-			<Content type={props.type}>
-				<Wrapper>{props.children}</Wrapper>
-			</Content>
+			<Wrapper>
+				<Content type={props.type}>{props.children}</Content>
+			</Wrapper>
 		</Layout>
 	);
 }

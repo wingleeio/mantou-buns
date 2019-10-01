@@ -5,20 +5,13 @@ import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import AvatarDropdown from "./AvatarDropdown";
 import { logout } from "../../store/actions/auth.actions";
+import ButtonGroup from "antd/lib/button/button-group";
 
 const UserNavContainer = styled.div`
 	display: flex;
 	align-items: center;
 
 	margin-left: 48px;
-`;
-
-const IconContainer = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	width: 64px;
 `;
 
 function UserNavigation({ authenticated, history, user, logout }) {
@@ -39,11 +32,20 @@ function UserNavigation({ authenticated, history, user, logout }) {
 		<UserNavContainer>
 			{authenticated ? (
 				<React.Fragment>
-					<IconContainer>
-						<Badge count={3}>
-							<Icon type='bell' style={{ fontSize: "18px" }} />
-						</Badge>
-					</IconContainer>
+					<ButtonGroup style={{ marginRight: "24px" }}>
+						<Button type='primary'>
+							<Icon type='plus-square' theme='filled' />
+							Write Post
+						</Button>
+						<Button>
+							<Badge count={3}>
+								<Icon
+									type='bell'
+									style={{ fontSize: "18px" }}
+								/>
+							</Badge>
+						</Button>
+					</ButtonGroup>
 					<AvatarDropdown user={user} logout={logout} />
 				</React.Fragment>
 			) : (
