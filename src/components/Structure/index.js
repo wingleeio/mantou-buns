@@ -69,15 +69,16 @@ function Structure(props) {
 
 	React.useEffect(() => {
 		window.addEventListener("resize", () => setHeight(window.innerHeight));
-		return () =>
+		return () => {
 			window.addEventListener("resize", () =>
 				setHeight(window.innerHeight)
 			);
+		};
 	}, []);
 	return (
 		<Layout>
 			<Helmet title='Mantou Buns' />
-			<Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+			<Header style={{ position: "fixed", zIndex: 1001, width: "100%" }}>
 				<Wrapper>
 					<Logo>
 						<Link to='/'>MANTOU</Link>

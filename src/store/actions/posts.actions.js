@@ -1,5 +1,5 @@
 import { requestWithHandling } from "../../api";
-import { POSTS_ROUTE } from "../../api/endpoints";
+import { POSTS_ROUTE, GET_POST_ROUTE } from "../../api/endpoints";
 
 export const getPosts = query => dispatch => {
 	dispatch({ type: "POSTS_LOADING" });
@@ -17,7 +17,7 @@ export const getPosts = query => dispatch => {
 export const getPost = ID => dispatch => {
 	dispatch({ type: "POST_LOADING" });
 	requestWithHandling({
-		url: `${POSTS_ROUTE}/${ID}`,
+		url: GET_POST_ROUTE(ID),
 		method: "get",
 		callback: data => {
 			dispatch({
