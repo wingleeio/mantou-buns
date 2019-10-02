@@ -27,7 +27,7 @@ const Wrapper = styled.div`
 const Content = styled(Layout.Content)`
 	margin-top: 64px;
 	padding: 25px 0px;
-	min-height: ${window.innerHeight}px !important;
+	min-height: ${props => props.height - 64}px !important;
 	display: ${props => {
 		switch (props.type) {
 			case "centered":
@@ -65,6 +65,15 @@ const Logo = styled.h1`
 `;
 
 function Structure(props) {
+	const [height, setHeight] = React.useState(window.innerHeight);
+
+	React.useEffect(() => {
+		window.addEventListener("resize", () => setHeight(window.innerHeight));
+		return () =>
+			window.addEventListener("resize", () =>
+				setHeight(window.innerHeight)
+			);
+	}, []);
 	return (
 		<Layout>
 			<Helmet title='Mantou Buns' />
@@ -79,7 +88,7 @@ function Structure(props) {
 				</Wrapper>
 			</Header>
 			<Wrapper>
-				<Content type={props.type} height={() => window.innerHeight}>
+				<Content type={props.type} height={height}>
 					{props.children}
 				</Content>
 			</Wrapper>
