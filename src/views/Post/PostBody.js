@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { Spin } from "antd";
+import { Spin, Card } from "antd";
 import { getPost } from "../../store/actions/posts.actions";
 import PostSingle from "../../components/PostSingle";
 import styled from "styled-components";
@@ -10,6 +10,27 @@ const LoadingCard = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+`;
+
+const PostContainer = styled.div`
+	display: flex;
+	padding: 24px 0px;
+`;
+
+const PostCard = styled(Card)`
+	flex-grow: 1;
+	margin-right: 24px !important;
+	@media (max-width: 768px) {
+		margin-right: 0px !important;
+	}
+`;
+
+const SideCard = styled(Card)`
+	min-width: 272px;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 `;
 
 function PostBody({ match, post, getPost, authenticated, post_loading }) {
@@ -22,7 +43,18 @@ function PostBody({ match, post, getPost, authenticated, post_loading }) {
 			<Spin size='large' />
 		</LoadingCard>
 	) : (
-		<PostSingle authenticated={authenticated} item={post} postPage={true} />
+		<PostContainer>
+			<PostCard>
+				<PostSingle
+					authenticated={authenticated}
+					item={post}
+					postPage={true}
+				/>
+			</PostCard>
+			<div>
+				<SideCard width={368}>test</SideCard>
+			</div>
+		</PostContainer>
 	);
 }
 

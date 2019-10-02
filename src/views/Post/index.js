@@ -6,9 +6,7 @@ import Structure from "../../components/Structure";
 function Post() {
 	return (
 		<Structure type='centered-h'>
-			<Card>
-				<PostBody />
-			</Card>
+			<PostBody />
 		</Structure>
 	);
 }

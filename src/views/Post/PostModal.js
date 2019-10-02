@@ -17,6 +17,7 @@ const StyledModal = styled(Modal)`
 		position: relative;
 		min-height: ${props => props.modalHeight}px;
 		padding-top: ${MODAL_HEADER_HEIGHT + 1}px !important;
+		background-color: #f0f2f5;
 	}
 
 	.ant-modal-content {
