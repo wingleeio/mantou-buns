@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Comment, Icon } from "antd";
+import { Avatar, Comment, Icon, Empty } from "antd";
 import { convertTimeSince } from "../../helpers";
 import styled from "styled-components";
 
@@ -91,6 +91,9 @@ function PostSingle({ withReplies, item, authenticated, postPage }) {
 						/>
 					);
 				})}
+			{postPage && item.replies.length === 0 && (
+				<Empty description={<span>No replies.</span>} />
+			)}
 		</React.Fragment>
 	);
 }
